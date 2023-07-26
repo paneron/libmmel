@@ -27,7 +27,7 @@ on:
         default: 'skip'
 
 env:
-  CACHE_DIR: env
+  CACHE_DIR: dist
   node: ${{ vars.DEFAULT_NODE_VERSION }}
 
 jobs:
