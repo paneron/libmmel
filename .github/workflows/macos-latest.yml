@@ -1,0 +1,47 @@
+name: macos-latest
+
+on:
+  workflow_dispatch:
+  workflow_call:
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - v*
+    paths-ignore:
+      - '/*.sh'
+      - '/.*'
+      - '/_*'
+      - '/vcpkg.txt'
+      - 'docs/**'
+      - '**.adoc'
+      - '**.md'
+      - '**.nix'
+      - 'flake.lock'
+      - '.github/workflows/*.yml'
+      - '!.github/workflows/macos-latest.yml'
+      - '!.github/workflows/build.yml'
+      - '!.github/workflows/test.yml'
+  pull_request:
+    paths-ignore:
+      - '/*.sh'
+      - '/.*'
+      - '/_*'
+      - '/vcpkg.txt'
+      - 'docs/**'
+      - '**.adoc'
+      - '**.md'
+      - '**.nix'
+      - 'flake.lock'
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      os: macos-latest
+
+  test:
+    needs: [build]
+    uses: ./.github/workflows/test.yml
+    with:
+      os: macos-latest

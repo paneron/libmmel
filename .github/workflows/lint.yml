@@ -1,0 +1,108 @@
+name: lint
+
+on:
+  workflow_dispatch:
+  workflow_call:
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - v*
+    paths-ignore:
+      - '/*.sh'
+      - '/.*'
+      - '/_*'
+      - '/vcpkg.txt'
+      - 'docs/**'
+      - '**.adoc'
+      - '**.md'
+      - '**.nix'
+      - 'flake.lock'
+      - '.github/workflows/*.yml'
+      - '!.github/workflows/lint.yml'
+  pull_request:
+    paths-ignore:
+      - '/*.sh'
+      - '/.*'
+      - '/_*'
+      - '/vcpkg.txt'
+      - 'docs/**'
+      - '**.adoc'
+      - '**.md'
+      - '**.nix'
+      - 'flake.lock'
+
+env:
+  CACHE_TEST_DIR: cache-lint
+  node: ${{ vars.DEFAULT_NODE_VERSION }}
+
+jobs:
+  lint:
+    name: Lint on NodeJS ${{ env.node }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Calculate a fragment of cache key
+        id: cache-key
+        run: |
+          echo "fragment=$(< package.json command grep '"lint"' | command sha256sum | command head -c8)" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Calculate build-cache and dist-cache keys
+        # Because the exact same hashFiles invocation produces different
+        # results down the file
+        id: build-cache-keys
+        shell: bash
+        run: |
+          if command -v shasum; then sum() { shasum -a 256 "$@"; } ; else sum() { sha256sum "$@"; }; fi
+          fragment="${{ runner.os }}-${{ env.node }}-${{ hashFiles('**/*eslintrc*', '**/.*eslintrc*', '*.ts', '**/src/**', '**/.swcrc', '**/.npmrc', '**/tsconfig*.json', '**/pnpm-lock.yaml') }}-$(< package.json sum | command head -c8)"
+          lint_fragment="${{ hashFiles('.github/workflows/lint.yml') }}"
+          echo "lint-key=lint-${fragment}-${build_fragment}" | tee -a $GITHUB_OUTPUT
+
+      - name: Restore test cache
+        id: test_cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.CACHE_TEST_DIR }}
+          key: ${{ steps.build-cache-keys.outputs.test-key }}
+
+      - uses: pnpm/action-setup@v2
+        if: steps.test_cache.outputs.cache-hit != 'true'
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+
+      # See: https://github.com/pnpm/action-setup#use-cache-to-reduce-installation-time
+      - name: Get pnpm store directory
+        if: steps.test_cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        if: steps.test_cache.outputs.cache-hit != 'true'
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/.npmrc', '**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        if: steps.test_cache.outputs.cache-hit != 'true'
+        run: pnpm install --frozen-lockfile --strict-peer-dependencies
+
+      - if: steps.test_cache.outputs.cache-hit != 'true'
+        run: |
+          pnpm run lint-typecheck
+          mkdir -p ${{ env.CACHE_TEST_DIR }}
+          touch ${{ env.CACHE_TEST_DIR }}/pass

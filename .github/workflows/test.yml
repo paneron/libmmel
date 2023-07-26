@@ -1,0 +1,101 @@
+name: test
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      os:
+        required: true
+        type: string
+      node:
+        required: false
+        type: string
+        default: ${{ vars.DEFAULT_NODE_VERSION }}
+      CACHE_DIR:
+        required: false
+        type: string
+        default: dist
+
+env:
+  CACHE_TEST_DIR: cache-test
+
+jobs:
+  test:
+    name: Test
+    runs-on: ${{ inputs.os }}
+
+    strategy:
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Calculate cache keys
+        # Because the exact same hashFiles invocation produces different
+        # results down the file
+        id: build-cache-keys
+        shell: bash
+        run: |
+          if command -v shasum; then sum() { shasum -a 256 "$@"; } ; else sum() { sha256sum "$@"; }; fi
+          fragment="${{ runner.os }}-${{ inputs.node }}-${{ hashFiles('*.ts', '**/src/**', '**/.swcrc', '**/.npmrc', '**/tsconfig*.json', '**/pnpm-lock.yaml') }}-$(< package.json sum | command head -c8)"
+          build_fragment="${{ hashFiles('.github/workflows/build.yml') }}"
+          test_fragment="${build_fragment}-${{ hashFiles('.github/workflows/test.yml') }}"
+          echo "build-key=build-${fragment}-${build_fragment}" | tee -a $GITHUB_OUTPUT
+          echo "test-key=test-${fragment}-${test_fragment}" | tee -a $GITHUB_OUTPUT
+
+      - name: Restore test cache
+        id: test_cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ inputs.CACHE_DIR }}
+          key: ${{ steps.build-cache-keys.outputs.test-key }}
+
+      - uses: actions/setup-node@v3
+        if: steps.test_cache.outputs.cache-hit != 'true'
+        id: setup-node
+        with:
+          node-version: ${{ inputs.node }}
+
+      - uses: pnpm/action-setup@v2
+        if: steps.test_cache.outputs.cache-hit != 'true'
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+
+      # See: https://github.com/pnpm/action-setup#use-cache-to-reduce-installation-time
+      - name: Get pnpm store directory
+        if: steps.test_cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        if: steps.test_cache.outputs.cache-hit != 'true'
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/.npmrc', '**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        if: steps.test_cache.outputs.cache-hit != 'true'
+        run: pnpm install --frozen-lockfile --strict-peer-dependencies
+
+      - name: Restore build cache
+        if: steps.test_cache.outputs.cache-hit != 'true'
+        uses: actions/cache@v3
+        with:
+          path: ${{ inputs.CACHE_DIR }}
+          key: ${{ steps.build-cache-keys.outputs.build-key }}
+          fail-on-cache-miss: true
+
+      - if: steps.test_cache.outputs.cache-hit != 'true'
+        run: |
+          pnpm run test:unit
+          mkdir -p ${{ env.CACHE_TEST_DIR }}
+          touch ${{ env.CACHE_TEST_DIR }}/pass
