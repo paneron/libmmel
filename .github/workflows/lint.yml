@@ -49,7 +49,7 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Calculate build-cache and dist-cache keys
+      - name: Calculate cache keys
         # Because the exact same hashFiles invocation produces different
         # results down the file
         id: build-cache-keys
