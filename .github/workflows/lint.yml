@@ -49,12 +49,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Calculate a fragment of cache key
-        id: cache-key
-        run: |
-          echo "fragment=$(< package.json command grep '"lint"' | command sha256sum | command head -c8)" >> $GITHUB_OUTPUT
-        shell: bash
-
       - name: Calculate build-cache and dist-cache keys
         # Because the exact same hashFiles invocation produces different
         # results down the file
@@ -71,7 +65,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.CACHE_TEST_DIR }}
-          key: ${{ steps.build-cache-keys.outputs.test-key }}
+          key: ${{ steps.build-cache-keys.outputs.lint-key }}
 
       - uses: pnpm/action-setup@v2
         if: steps.test_cache.outputs.cache-hit != 'true'
