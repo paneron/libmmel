@@ -44,7 +44,7 @@ jobs:
         id: build_cache
         uses: actions/cache@v3
         with:
-          path: ${{ env.CACHE_DIR }}
+          path: ${{ inputs.CACHE_DIR }}
           key: ${{ steps.build-cache-keys.outputs.build-key }}
 
       - uses: actions/setup-node@v3
