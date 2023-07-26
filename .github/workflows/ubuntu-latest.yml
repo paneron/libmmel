@@ -39,11 +39,9 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       os: ubuntu-latest
-      node: ${{ vars.DEFAULT_NODE_VERSION }}
 
   test:
     needs: [build]
     uses: ./.github/workflows/test.yml
     with:
       os: ubuntu-latest
-      node: ${{ vars.DEFAULT_NODE_VERSION }}

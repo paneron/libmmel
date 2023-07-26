@@ -8,8 +8,9 @@ on:
         required: true
         type: string
       node:
-        required: true
+        required: false
         type: string
+        default: ${{ vars.DEFAULT_NODE_VERSION }}
       CACHE_DIR:
         required: false
         type: string
