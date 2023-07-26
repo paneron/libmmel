@@ -1,5 +1,11 @@
 = libmmel
 
+image:https://github.com/paneron/libmmel/actions/workflows/lint.yml/badge.svg[alt="Lint",link="https://github.com/paneron/libmmel/actions/workflows/lint.yml"]
+
+image:https://github.com/paneron/libmmel/actions/workflows/macos-latest.yml/badge.svg[alt="Build/release (macOS)",link="https://github.com/paneron/libmmel/actions/workflows/macos-latest.yml"]
+image:https://github.com/paneron/libmmel/actions/workflows/ubuntu-latest.yml/badge.svg[alt="Build/release (Ubuntu)",link="https://github.com/paneron/libmmel/actions/workflows/ubuntu-latest.yml"]
+image:https://github.com/paneron/libmmel/actions/workflows/windows-latest.yml/badge.svg[alt="Build/release (Windows)",link="https://github.com/paneron/libmmel/actions/workflows/windows-latest.yml"]
+
 == Introduction
 
 This folder contains the data model for MMEL model. Note that this model does not contain runtime information. So, there is another model 'EditorModel' which is like an upgraded version of the model for the runtime.
