@@ -107,10 +107,11 @@ jobs:
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 
           # cd to where project package.json is
-          pnpm version --new-version ${{ github.event.inputs.next_version }}
-          git add -u
-          git commit -m "chore: Release ${{ github.event.inputs.next_version }}"
-          git tag -a "${{ github.event.inputs.next_version }}" -mBump
+          # pnpm version \
+          #   --new-version ${{ github.event.inputs.next_version }} \
+          #   --message "chore: Release ${{ github.event.inputs.next_version }}"
+          pnpm bump-version ${{ github.event.inputs.next_version }}
+
           # Push commit along with tag
           git push origin --tags :
 

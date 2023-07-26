@@ -34,6 +34,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "lint-typecheck": "concurrently npm:lint npm:typecheck",
+    "bump-version": "pnpm version --message \"chore: Release v%s\" --new-version ",
     "fix": "pnpm run lint --fix"
   },
   "files": [
