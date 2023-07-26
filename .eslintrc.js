@@ -124,10 +124,6 @@ var rules = {
   '@typescript-eslint/no-non-null-asserted-nullish-coalescing' : 'warn',
   'no-unused-vars' : 'off',
   '@typescript-eslint/no-unused-vars' : 'warn',
-  '@emotion/jsx-import' : 'error',
-  '@emotion/no-vanilla' : 'error',
-  '@emotion/import-from-emotion' : 'error',
-  '@emotion/styled-import' : 'error',
 };
 
 module.exports = {
@@ -161,7 +157,7 @@ module.exports = {
     },
     {
       "files"   : ["spec/**"],
-      "plugins" : ["jest", "@emotion"],
+      "plugins" : ["jest"],
       "extends" : ["plugin:jest/recommended", "plugin:jest/style"],
       "rules"   : {
         "jest/prefer-expect-assertions" : "off",
