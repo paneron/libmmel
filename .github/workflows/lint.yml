@@ -49,11 +49,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Set up Node version from vars
-        shell: bash
-        run: |
-          echo "node=${{ vars.DEFAULT_NODE_VERSION }}" | tee -a $GITHUB_ENV
-
       - name: Calculate build-cache and dist-cache keys
         # Because the exact same hashFiles invocation produces different
         # results down the file
