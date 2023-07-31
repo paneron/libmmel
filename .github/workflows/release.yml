@@ -116,10 +116,14 @@ jobs:
           git push origin --tags :
 
       - name: Publish to npm
+        shell: bash
         run: |
-          # cd to where project package.json is
-          diff -u {,dist/}package.json | \
-            cp {,dist/}package.json
-          pnpm publish dist --access public --no-git-checks
+          # Ensure there is a sane number of files.
+          if ! pnpm publish --no-git-checks --dry-run --json | grep -q 'path.*:.*dist/main.js'
+          then
+            >&2 echo "error: dist/main.js missing.  Aborting publish process."
+            exit 1
+          fi
+          pnpm publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PANERON_CI_NPM_TOKEN }}
