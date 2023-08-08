@@ -118,7 +118,7 @@ jobs:
       - name: Publish to npm
         shell: bash
         run: |
-          # Ensure there is a sane number of files.
+          # Ensure there is a dist/main.js.
           if ! pnpm publish --no-git-checks --dry-run --json | grep -q 'path.*:.*dist/main.js'
           then
             >&2 echo "error: dist/main.js missing.  Aborting publish process."
