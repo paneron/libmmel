@@ -156,6 +156,15 @@ module.exports = {
       rules : rules,
     },
     {
+      "files"   : ["*.json"],
+      "rules"   : {
+        "key-spacing" : "off",
+        "max-len" : "off",
+        "quote-props" : ["error", "always"],
+        "quotes" : ["error", "double"],
+      },
+    },
+    {
       "files"   : ["spec/**"],
       "plugins" : ["jest"],
       "extends" : ["plugin:jest/recommended", "plugin:jest/style"],
