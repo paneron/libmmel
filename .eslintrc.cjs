@@ -1,4 +1,4 @@
-var path = require('path');
+const path = require('path');
 
 var rules = {
   'quotes' : [
@@ -126,11 +126,7 @@ var rules = {
   '@typescript-eslint/no-unused-vars' : 'warn',
 };
 
-module.exports = {
-  root      : true,
-  "env"   : {
-    // "jest/globals" : true,
-  },
+var typescriptConfig = {
   "extends" : [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -149,14 +145,55 @@ module.exports = {
       typescript : {}
     }
   },
-  "rules" : rules,
+};
+
+module.exports = {
+  "extends" : [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/strict',
+    // "plugin:prettier/recommended",
+  ],
+  "parser"        : "@typescript-eslint/parser",
+  "parserOptions" : {
+    project : path.join(__dirname, "tsconfig.json"),
+  },
+  "settings" : {
+    react : {
+      version : "detect"
+    },
+    "import/resolver" : {
+      typescript : {}
+    }
+  },
+  root      : true,
+  "env"   : {
+    // "jest/globals" : true,
+  },
   overrides : [
     {
+      files : ["*.ts"],
+      rules : rules,
+    },
+    {
+      extends : [],
+      parser : null,
+      parserOptions : {},
+      settings : {},
       files : ["*.js"],
       rules : rules,
     },
     {
-      "files"   : ["*.json"],
+      "files"   : ["*.json", "*.json5", "*.jsonc"],
+      // parser: "jsonc-eslint-parser",
+      parser: null,
+      parserOptions : {},
+      settings : {},
+      extends: [
+        // add more generic rulesets here, such as:
+        // 'eslint:recommended',
+        // "plugin:jsonc/recommended-with-jsonc",
+      ],
       "rules"   : {
         "key-spacing" : "off",
         "max-len" : "off",
