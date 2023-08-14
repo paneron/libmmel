@@ -7,6 +7,7 @@
     "name": "Ribose Inc.",
     "email": "open.source@ribose.com"
   },
+  "node": ">=14.16",
   "src_dir": "src",
   "dist_dir": "dist",
   "scripts": {
