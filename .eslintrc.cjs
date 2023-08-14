@@ -172,7 +172,10 @@ module.exports = {
   },
   overrides : [
     {
-      files : ["*.ts"],
+      files : ["src/**/*.test.ts"],
+      "parserOptions" : {
+        project : path.join(__dirname, "tsconfig.test.json"),
+      },
       rules : rules,
     },
     {
