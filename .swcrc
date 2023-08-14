@@ -7,10 +7,10 @@
     "externalHelpers": false,
     "paths": {
       "@": [
-        "src/main"
+        "./src/main"
       ],
       "@/*": [
-        "src/*"
+        "./src/*"
       ]
     },
     "parser": {
