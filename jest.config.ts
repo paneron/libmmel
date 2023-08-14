@@ -14,7 +14,7 @@ import type { JestConfigWithTsJest } from 'ts-jest';
 
 const _pathsToModuleName: Record<string, string | string[]> = pathsToModuleNameMapper(
   compilerOptions.paths,
-  // { prefix : '<rootDir>/' },
+  { prefix : '<rootDir>/' },
 ) ?? {};
 
 const pathsToModuleName: Record<string, string | string[]> = {} as Record<string, string | string[]>;
