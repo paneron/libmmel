@@ -2,7 +2,6 @@
   "name": "@paneron/libmmel",
   "version": "0.0.1-dev.0",
   "description": "MMEL library",
-  "main": "./dist/main.js",
   "repository": "https://github.com/paneron/libmmel",
   "author": {
     "name": "Ribose Inc.",
@@ -15,9 +14,13 @@
     "diagnose": "tsc --diagnostics",
     "typecheck": "tsc -p tsconfig.build.json --noEmit --pretty",
     "build:decl": "tsc -p tsconfig.build.json --emitDeclarationOnly",
-    "build": "run-script-os",
-    "build:default": "swc ${npm_package_src_dir} --sync --ignore '*.test.*' --out-dir ${npm_package_dist_dir} --copy-files --extensions '.ts,.tsx,.js,.jsx,.json' && cp package.json ${npm_package_dist_dir}/",
-    "build:win32": "mkdirp %npm_package_dist_dir% && swc %npm_package_src_dir% --sync --out-dir %npm_package_dist_dir% --copy-files --extensions '.ts,.tsx,.js,.jsx,.json' && copy package.json %npm_package_dist_dir%",
+    "build": "concurrently pnpm:build:cjs pnpm:build:mjs",
+    "build:mjs": "run-script-os",
+    "build:mjs:default": "swc ${npm_package_src_dir} --sync --config module.type=es6 --out-dir ${npm_package_dist_dir}/mjs --copy-files --extensions '.ts,.tsx,.js,.jsx,.json'",
+    "build:mjs:win32": "mkdirp %npm_package_dist_dir% && swc %npm_package_src_dir% --sync --config module.type=es6 --out-dir %npm_package_dist_dir%/mjs --copy-files --extensions '.ts,.tsx,.js,.jsx,.json'",
+    "build:cjs": "run-script-os",
+    "build:cjs:default": "swc ${npm_package_src_dir} --sync --config module.type=commonjs --out-dir ${npm_package_dist_dir}/cjs --copy-files --extensions '.ts,.tsx,.js,.jsx,.json'",
+    "build:cjs:win32": "mkdirp %npm_package_dist_dir% && swc %npm_package_src_dir% --sync --config module.type=commonjs --out-dir %npm_package_dist_dir%/cjs --copy-files --extensions '.ts,.tsx,.js,.jsx,.json'",
     "tsc": "run-script-os",
     "tsc:default": "tsc -p tsconfig.build.json && cp package.json ${npm_package_dist_dir}/",
     "tsc:win32": "mkdirp %npm_package_dist_dir% && tsc -p tsconfig.build.json && copy package.json %npm_package_dist_dir%",
@@ -41,12 +44,41 @@
   "files": [
     "dist"
   ],
-  "types": "./dist/main.d.ts",
+  "main": "main.js",
+  "types": "main.d.ts",
+  "type": "module",
   "typesVersions": {
     "*": {
       "*": [
-        "dist/*"
+        "dist/mjs/*"
       ]
+    }
+  },
+  "// exports": {
+    ".": {
+      "types": "./dist/mjs/main.d.ts",
+      "import": "./dist/mjs/main.js",
+      "node": "./dist/cjs/main.js"
+    },
+    "./interface/*": {
+      "types": "./dist/mjs/interface/*.d.ts",
+      "import": "./dist/mjs/interface/*.js",
+      "node": "./dist/cjs/interface/*.js"
+    },
+    "./handler/*": {
+      "types": "./dist/mjs/handler/*.d.ts",
+      "import": "./dist/mjs/handler/*.js",
+      "node": "./dist/cjs/handler/*.js"
+    },
+    "./util/*": {
+      "types": "./dist/mjs/util/*.d.ts",
+      "import": "./dist/mjs/util/*.js",
+      "node": "./dist/cjs/util/*.js"
+    },
+    "./*": {
+      "types": "./dist/mjs/*.d.ts",
+      "import": "./dist/mjs/*.js",
+      "node": "./dist/cjs/*.js"
     }
   },
   "devDependencies": {

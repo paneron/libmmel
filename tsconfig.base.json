@@ -2,7 +2,7 @@
   "compilerOptions": {
     "composite": true,
     "target": "es2017",
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "declaration": true,
     "declarationMap": true,
