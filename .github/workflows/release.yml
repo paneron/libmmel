@@ -118,10 +118,23 @@ jobs:
       - name: Publish to npm
         shell: bash
         run: |
-          # Ensure there is a dist/main.js.
-          if ! pnpm publish --no-git-checks --dry-run --json | grep -q 'path.*:.*dist/main.js'
+          # Ensure these files are here:
+          missing_files=()
+          for file in dist/mjs/main.js
+          do
+            if ! pnpm publish --no-git-checks --dry-run --json | grep -q 'path.*:.*'"$file"
+            then
+              missing_files+=("$file")
+            fi
+          done
+
+          if [[ ${#missing_files[@]} -gt 0 ]]
           then
-            >&2 echo "error: dist/main.js missing.  Aborting publish process."
+            >&2 echo "error: The following files are missing.  Aborting publish process."
+            for file in "${missing_files[@]}"
+            do
+              >&2 echo "  $file"
+            done
             exit 1
           fi
           pnpm publish --access public --no-git-checks
