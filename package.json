@@ -35,6 +35,7 @@
     "clean": "run-script-os",
     "clean:default": "rimraf ${npm_package_dist_dir}/* *.tsbuildinfo",
     "clean:win32": "rimraf %npm_package_dist_dir%/* *.tsbuildinfo",
+    "test-dist": "./scripts/test-dist",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint-typecheck": "concurrently npm:lint npm:typecheck",

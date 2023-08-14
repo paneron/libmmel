@@ -98,5 +98,6 @@ jobs:
         shell: bash
         run: |
           pnpm run test
+          pnpm run test-dist
           mkdir -p ${{ env.CACHE_TEST_DIR }}
           touch ${{ env.CACHE_TEST_DIR }}/pass

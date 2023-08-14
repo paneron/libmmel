@@ -118,25 +118,6 @@ jobs:
       - name: Publish to npm
         shell: bash
         run: |
-          # Ensure these files are here:
-          missing_files=()
-          for file in dist/mjs/main.js
-          do
-            if ! pnpm publish --no-git-checks --dry-run --json | grep -q 'path.*:.*'"$file"
-            then
-              missing_files+=("$file")
-            fi
-          done
-
-          if [[ ${#missing_files[@]} -gt 0 ]]
-          then
-            >&2 echo "error: The following files are missing.  Aborting publish process."
-            for file in "${missing_files[@]}"
-            do
-              >&2 echo "  $file"
-            done
-            exit 1
-          fi
           pnpm publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PANERON_CI_NPM_TOKEN }}
