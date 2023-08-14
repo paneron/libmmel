@@ -54,7 +54,7 @@
       ]
     }
   },
-  "// exports": {
+  "exports": {
     ".": {
       "types": "./dist/mjs/main.d.ts",
       "import": "./dist/mjs/main.js",
