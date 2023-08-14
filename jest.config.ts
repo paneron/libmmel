@@ -4,8 +4,11 @@
  * https://jestjs.io/docs/configuration
  */
 
+import * as fs from 'fs';
 import { pathsToModuleNameMapper } from 'ts-jest';
 import { compilerOptions } from './tsconfig.json';
+
+const swcrc = JSON.parse(fs.readFileSync(`${__dirname}/.swcrc`, "utf-8"));
 
 import type { JestConfigWithTsJest } from 'ts-jest';
 
@@ -236,7 +239,11 @@ const jestConfig: JestConfigWithTsJest = {
 
   // Use @swc/jest to support nodejs 14.x:
   transform : {
-    '^.+\\.(t|j)sx?$' : ['@swc/jest', {}],
+    '^.+\\.(t|j)sx?$' : ['@swc/jest', {
+      ...swcrc,
+      exclude: [],
+      swcrc: false
+    }],
   },
 
   // An array of regexp pattern strings that are matched against all source

@@ -3,6 +3,9 @@
   "module": {
     "type": "commonjs"
   },
+  "exclude": [
+    "./*\\.test\\.ts$"
+  ],
   "jsc": {
     "externalHelpers": false,
     "paths": {
