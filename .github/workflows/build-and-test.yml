@@ -50,7 +50,6 @@ jobs:
       matrix:
         node: [16, 18, 20]
 
-    needs: [build]
     uses: ./.github/workflows/test.yml
     with:
       os: ubuntu-latest
