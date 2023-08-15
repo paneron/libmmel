@@ -6,9 +6,6 @@ image:https://img.shields.io/github/v/release/paneron/libmmel?display_name=tag&i
   GitHub release (latest SemVer including pre-releases),
   link="https://www.npmjs.com/package/@paneron/libmmel"]
 
-image:https://github.com/paneron/libmmel/actions/workflows/macos-latest.yml/badge.svg[
-  alt="Build/release (macOS)",
-  link="https://github.com/paneron/libmmel/actions/workflows/macos-latest.yml"]
 image:https://github.com/paneron/libmmel/actions/workflows/ubuntu-latest.yml/badge.svg[
   alt="Build/release (Ubuntu)",
   link="https://github.com/paneron/libmmel/actions/workflows/ubuntu-latest.yml"]
