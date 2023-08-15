@@ -37,7 +37,7 @@ jobs:
   build-and-test:
     # XXX: does not skip for some reason
     # if: github.events.inputs.skip_tests != 'true'
-    uses: ./.github/workflows/ubuntu-latest.yml
+    uses: ./.github/workflows/build-and-test.yml
 
   publish:
     needs: [lint, build-and-test]

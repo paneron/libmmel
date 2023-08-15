@@ -6,9 +6,9 @@ image:https://img.shields.io/github/v/release/paneron/libmmel?display_name=tag&i
   GitHub release (latest SemVer including pre-releases),
   link="https://www.npmjs.com/package/@paneron/libmmel"]
 
-image:https://github.com/paneron/libmmel/actions/workflows/ubuntu-latest.yml/badge.svg[
+image:https://github.com/paneron/libmmel/actions/workflows/ci.yml/badge.svg[
   alt="Build / Test",
-  link="https://github.com/paneron/libmmel/actions/workflows/ubuntu-latest.yml"]
+  link="https://github.com/paneron/libmmel/actions/workflows/ci.yml"]
 
 image:https://github.com/paneron/libmmel/actions/workflows/lint.yml/badge.svg[
   alt="Lint",
