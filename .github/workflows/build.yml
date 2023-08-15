@@ -87,3 +87,9 @@ jobs:
         run: |
           pnpm run dist
           find . -type d -name node_modules -prune -o -name '*.*' -print
+
+      - name: Test build artifacts sanity
+        if: steps.build_cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          pnpm run test-dist

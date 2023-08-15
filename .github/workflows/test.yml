@@ -89,11 +89,6 @@ jobs:
       - if: steps.test_cache.outputs.cache-hit != 'true'
         shell: bash
         run: |
-          pnpm run test-dist
-
-      - if: steps.test_cache.outputs.cache-hit != 'true'
-        shell: bash
-        run: |
           pnpm run test
           mkdir -p ${{ env.CACHE_TEST_DIR }}
           touch ${{ env.CACHE_TEST_DIR }}/pass
