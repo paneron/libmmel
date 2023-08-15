@@ -36,9 +36,14 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        node: [16, 18, 20]
+
     uses: ./.github/workflows/build.yml
     with:
       os: ubuntu-latest
+      node: ${{ matrix.node }}
 
   test:
     needs: [build]
