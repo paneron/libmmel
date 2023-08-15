@@ -12,9 +12,6 @@ image:https://github.com/paneron/libmmel/actions/workflows/macos-latest.yml/badg
 image:https://github.com/paneron/libmmel/actions/workflows/ubuntu-latest.yml/badge.svg[
   alt="Build/release (Ubuntu)",
   link="https://github.com/paneron/libmmel/actions/workflows/ubuntu-latest.yml"]
-image:https://github.com/paneron/libmmel/actions/workflows/windows-latest.yml/badge.svg[
-  alt="Build/release (Windows)",
-  link="https://github.com/paneron/libmmel/actions/workflows/windows-latest.yml"]
 
 image:https://github.com/paneron/libmmel/actions/workflows/lint.yml/badge.svg[
   alt="Lint",
