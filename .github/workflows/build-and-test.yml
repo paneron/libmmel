@@ -1,4 +1,4 @@
-name: ubuntu-latest
+name: build-and-test
 
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ on:
       - '**.nix'
       - 'flake.lock'
       - '.github/workflows/*.yml'
-      - '!.github/workflows/ubuntu-latest.yml'
+      - '!.github/workflows/build-and-test.yml'
       - '!.github/workflows/build.yml'
       - '!.github/workflows/test.yml'
   pull_request:
