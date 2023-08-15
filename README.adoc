@@ -7,7 +7,7 @@ image:https://img.shields.io/github/v/release/paneron/libmmel?display_name=tag&i
   link="https://www.npmjs.com/package/@paneron/libmmel"]
 
 image:https://github.com/paneron/libmmel/actions/workflows/ubuntu-latest.yml/badge.svg[
-  alt="Build/release (Ubuntu)",
+  alt="Build / Test",
   link="https://github.com/paneron/libmmel/actions/workflows/ubuntu-latest.yml"]
 
 image:https://github.com/paneron/libmmel/actions/workflows/lint.yml/badge.svg[
