@@ -26,12 +26,12 @@
     "clean-build-typecheck": "pnpm run clean; pnpm run build-typecheck",
     "lint": "eslint ${npm_package_src_dir}/ --ext .ts,.tsx",
     "clean": "rimraf ${npm_package_dist_dir}/* *.tsbuildinfo",
-    "test-dist": "./scripts/test-dist",
+    "test:dist": "./scripts/test-dist",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint-typecheck": "concurrently npm:lint npm:typecheck",
-    "bump-version": "pnpm version --message \"chore: Release v%s\n\nCommand used: pnpm bump-version %s\" --new-version ",
-    "bump-dev-version": "pnpm version --new-version prerelease --preid dev --message \"chore: Release v%s\n\nCommand used: pnpm bump-dev-version\"",
+    "bump": "pnpm version --message \"chore: Release v%s\n\nCommand used: pnpm bump %s\" --new-version ",
+    "bump:dev": "pnpm version --new-version prerelease --preid dev --message \"chore: Release v%s\n\nCommand used: pnpm bump:dev\"",
     "fix": "pnpm run lint --fix"
   },
   "files": [

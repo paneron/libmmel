@@ -91,4 +91,4 @@ jobs:
         if: steps.build_cache.outputs.cache-hit != 'true'
         shell: bash
         run: |
-          pnpm run test-dist
+          pnpm run test:dist
