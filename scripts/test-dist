@@ -25,19 +25,27 @@ ensure_files_exist() {
     done
 
     return 1
+  else
+    >&2 echo "✅ The following files exist:"
+    for file in "${files_to_check[@]}"
+    do
+      >&2 echo "  $file"
+    done
   fi
 }
 
 ensure_paths_resolved() {
   local bad_files=()
+  local files_processed=0
 
   while read -r file
   do
+    ((files_processed++))
     if grep -q '@/' "$file"
     then
       bad_files+=("$file")
     fi
-  done < <(find ./dist/ -type f -name '*.ts')
+  done < <(find ./dist -type f -name '*.js' -o -name '*.ts')
 
   if [[ ${#bad_files[@]} -gt 0 ]]
   then
@@ -49,6 +57,8 @@ ensure_paths_resolved() {
     done
 
     return 1
+  else
+    >&2 echo "✅ All paths are resolved. ($files_processed files processed)"
   fi
 }
 
