@@ -20,7 +20,6 @@
     "build:mjs": "swc ${npm_package_src_dir} --sync --config module.type=es6 --out-dir ${npm_package_dist_dir}/mjs --copy-files --extensions '.ts,.tsx,.js,.jsx,.json'",
     "build:cjs": "swc ${npm_package_src_dir} --sync --config module.type=commonjs --out-dir ${npm_package_dist_dir}/cjs --copy-files --extensions '.ts,.tsx,.js,.jsx,.json'",
     "tsc": "tsc -p tsconfig.build.json && cp package.json ${npm_package_dist_dir}/",
-    "tsc:default": "",
     "dist": "concurrently pnpm:build pnpm:build:decl",
     "build-typecheck": "concurrently pnpm:build pnpm:typecheck",
     "clean-build": "pnpm run clean; pnpm run build",
