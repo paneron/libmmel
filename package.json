@@ -17,8 +17,9 @@
     "typecheck": "tsc -p tsconfig.build.json --noEmit --pretty",
     "build:decl": "tsc -p tsconfig.types.json",
     "build": "concurrently pnpm:build:cjs pnpm:build:mjs",
-    "build:mjs": "swc ${npm_package_src_dir} --sync --config module.type=es6 --out-dir ${npm_package_dist_dir}/mjs --copy-files --extensions '.ts,.tsx,.js,.jsx,.json'",
+    "build:mjs": "swc ${npm_package_src_dir} --sync --config module.type=es6 --out-dir ${npm_package_dist_dir}/mjs --copy-files --extensions '.ts,.tsx,.js,.jsx,.json' && pnpm run postbuild:mjs",
     "build:cjs": "swc ${npm_package_src_dir} --sync --config module.type=commonjs --out-dir ${npm_package_dist_dir}/cjs --copy-files --extensions '.ts,.tsx,.js,.jsx,.json'",
+    "postbuild:mjs": "echo '{\"type\": \"module\"}'> ${npm_package_dist_dir}/mjs/package.json",
     "tsc": "tsc -p tsconfig.build.json && cp package.json ${npm_package_dist_dir}/",
     "dist": "concurrently pnpm:build pnpm:build:decl",
     "build-typecheck": "concurrently pnpm:build pnpm:typecheck",
@@ -39,7 +40,6 @@
   ],
   "main": "main.js",
   "types": "main.d.ts",
-  "type": "module",
   "typesVersions": {
     "*": {
       "*": [
