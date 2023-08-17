@@ -1,11 +1,10 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
+    "emitDeclarationOnly": true,
+    "declaration": true,
     "rootDir": "src",
-    "outDir": "dist"
+    "outDir": "dist/types"
   },
   "include": [
     "src"

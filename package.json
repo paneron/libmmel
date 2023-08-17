@@ -15,11 +15,10 @@
     "preinstall": "npx only-allow pnpm",
     "diagnose": "tsc --diagnostics",
     "typecheck": "tsc -p tsconfig.build.json --noEmit --pretty",
-    "build:decl": "tsc -p tsconfig.build.json --emitDeclarationOnly",
+    "build:decl": "tsc -p tsconfig.types.json",
     "build": "concurrently pnpm:build:cjs pnpm:build:mjs",
     "build:mjs": "swc ${npm_package_src_dir} --sync --config module.type=es6 --out-dir ${npm_package_dist_dir}/mjs --copy-files --extensions '.ts,.tsx,.js,.jsx,.json'",
-    "build:cjs": "swc ${npm_package_src_dir} --sync --config module.type=commonjs --out-dir ${npm_package_dist_dir}/cjs --copy-files --extensions '.ts,.tsx,.js,.jsx,.json' && pnpm run postbuild:cjs",
-    "postbuild:cjs": "find ${npm_package_dist_dir}/cjs -name '*.js' -exec bash -c 'mv \"$0\" \"${0%.js}.cjs\"' \"{}\" \\;",
+    "build:cjs": "swc ${npm_package_src_dir} --sync --config module.type=commonjs --out-dir ${npm_package_dist_dir}/cjs --copy-files --extensions '.ts,.tsx,.js,.jsx,.json'",
     "tsc": "tsc -p tsconfig.build.json && cp package.json ${npm_package_dist_dir}/",
     "dist": "concurrently pnpm:build pnpm:build:decl",
     "build-typecheck": "concurrently pnpm:build pnpm:typecheck",
@@ -44,35 +43,35 @@
   "typesVersions": {
     "*": {
       "*": [
-        "dist/mjs/*"
+        "dist/types/*"
       ]
     }
   },
   "exports": {
     ".": {
-      "types": "./dist/mjs/main.d.ts",
+      "types": "./dist/types/main.d.ts",
       "import": "./dist/mjs/main.js",
-      "node": "./dist/cjs/main.cjs"
+      "require": "./dist/cjs/main.js"
     },
     "./interface/*": {
-      "types": "./dist/mjs/interface/*.d.ts",
+      "types": "./dist/types/interface/*.d.ts",
       "import": "./dist/mjs/interface/*.js",
-      "node": "./dist/cjs/interface/*.cjs"
+      "require": "./dist/cjs/interface/*.js"
     },
     "./handler/*": {
-      "types": "./dist/mjs/handler/*.d.ts",
+      "types": "./dist/types/handler/*.d.ts",
       "import": "./dist/mjs/handler/*.js",
-      "node": "./dist/cjs/handler/*.cjs"
+      "require": "./dist/cjs/handler/*.js"
     },
     "./util/*": {
-      "types": "./dist/mjs/util/*.d.ts",
+      "types": "./dist/types/util/*.d.ts",
       "import": "./dist/mjs/util/*.js",
-      "node": "./dist/cjs/util/*.cjs"
+      "require": "./dist/cjs/util/*.js"
     },
     "./*": {
-      "types": "./dist/mjs/*.d.ts",
+      "types": "./dist/types/*.d.ts",
       "import": "./dist/mjs/*.js",
-      "node": "./dist/cjs/*.cjs"
+      "require": "./dist/cjs/*.js"
     }
   },
   "devDependencies": {
