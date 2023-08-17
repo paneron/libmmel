@@ -18,7 +18,8 @@
     "build:decl": "tsc -p tsconfig.build.json --emitDeclarationOnly",
     "build": "concurrently pnpm:build:cjs pnpm:build:mjs",
     "build:mjs": "swc ${npm_package_src_dir} --sync --config module.type=es6 --out-dir ${npm_package_dist_dir}/mjs --copy-files --extensions '.ts,.tsx,.js,.jsx,.json'",
-    "build:cjs": "swc ${npm_package_src_dir} --sync --config module.type=commonjs --out-dir ${npm_package_dist_dir}/cjs --copy-files --extensions '.ts,.tsx,.js,.jsx,.json'",
+    "build:cjs": "swc ${npm_package_src_dir} --sync --config module.type=commonjs --out-dir ${npm_package_dist_dir}/cjs --copy-files --extensions '.ts,.tsx,.js,.jsx,.json' && pnpm run postbuild:cjs",
+    "postbuild:cjs": "find ${npm_package_dist_dir}/cjs -name '*.js' -exec bash -c 'mv \"$0\" \"${0%.js}.cjs\"' \"{}\" \\;",
     "tsc": "tsc -p tsconfig.build.json && cp package.json ${npm_package_dist_dir}/",
     "dist": "concurrently pnpm:build pnpm:build:decl",
     "build-typecheck": "concurrently pnpm:build pnpm:typecheck",
@@ -51,27 +52,27 @@
     ".": {
       "types": "./dist/mjs/main.d.ts",
       "import": "./dist/mjs/main.js",
-      "node": "./dist/cjs/main.js"
+      "node": "./dist/cjs/main.cjs"
     },
     "./interface/*": {
       "types": "./dist/mjs/interface/*.d.ts",
       "import": "./dist/mjs/interface/*.js",
-      "node": "./dist/cjs/interface/*.js"
+      "node": "./dist/cjs/interface/*.cjs"
     },
     "./handler/*": {
       "types": "./dist/mjs/handler/*.d.ts",
       "import": "./dist/mjs/handler/*.js",
-      "node": "./dist/cjs/handler/*.js"
+      "node": "./dist/cjs/handler/*.cjs"
     },
     "./util/*": {
       "types": "./dist/mjs/util/*.d.ts",
       "import": "./dist/mjs/util/*.js",
-      "node": "./dist/cjs/util/*.js"
+      "node": "./dist/cjs/util/*.cjs"
     },
     "./*": {
       "types": "./dist/mjs/*.d.ts",
       "import": "./dist/mjs/*.js",
-      "node": "./dist/cjs/*.js"
+      "node": "./dist/cjs/*.cjs"
     }
   },
   "devDependencies": {
