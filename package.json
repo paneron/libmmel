@@ -1,6 +1,6 @@
 {
   "name": "@paneron/libmmel",
-  "version": "0.0.1-dev.6",
+  "version": "0.0.1",
   "description": "MMEL library",
   "repository": "https://github.com/paneron/libmmel",
   "author": {
