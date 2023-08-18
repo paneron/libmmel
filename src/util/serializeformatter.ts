@@ -1,25 +1,25 @@
-import { MMELNode } from '@/interface/baseinterface';
-import {
+import type { MMELNode } from '@/interface/baseinterface';
+import type {
   MMELDataAttribute,
   MMELDataClass,
   MMELEnum,
   MMELEnumValue,
   MMELRegistry,
 } from '@/interface/datainterface';
-import {
+import type {
   MMELEndEvent,
   MMELSignalCatchEvent,
   MMELStartEvent,
   MMELTimerEvent,
 } from '@/interface/eventinterface';
-import {
+import type {
   MMELEdge,
   MMELEGate,
   MMELSubprocess,
   MMELSubprocessComponent,
 } from '@/interface/flowcontrolinterface';
-import { MMELApproval, MMELProcess } from '@/interface/processinterface';
-import {
+import type { MMELApproval, MMELProcess } from '@/interface/processinterface';
+import type {
   MMELComment,
   MMELFigure,
   MMELLink,

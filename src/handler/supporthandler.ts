@@ -1,5 +1,5 @@
 import { DataType } from '@/interface/baseinterface';
-import {
+import type {
   BINARY_TYPE,
   LINK_TYPE,
   MMELComment,
@@ -16,7 +16,8 @@ import {
   MMELVariable,
   MMELVarSetting,
   MMELView,
-  NOTE_TYPE,
+  NOTE_TYPE } from '@/interface/supportinterface';
+import {
   VarType,
 } from '@/interface/supportinterface';
 import {

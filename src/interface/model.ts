@@ -1,7 +1,7 @@
-import { MMELNode } from '@/interface/baseinterface';
-import { MMELEnum } from '@/interface/datainterface';
-import { MMELSubprocess } from '@/interface/flowcontrolinterface';
-import {
+import type { MMELNode } from '@/interface/baseinterface';
+import type { MMELEnum } from '@/interface/datainterface';
+import type { MMELSubprocess } from '@/interface/flowcontrolinterface';
+import type {
   MMELComment,
   MMELFigure,
   MMELLink,

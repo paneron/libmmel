@@ -1,4 +1,4 @@
-import { DataType, MMELNode } from '@/interface/baseinterface';
+import type { DataType, MMELNode } from '@/interface/baseinterface';
 
 export interface MMELApproval extends MMELNode {
   id: string;

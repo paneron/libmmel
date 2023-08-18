@@ -2,27 +2,28 @@
  * Perform basic validation on the parsed model
  */
 
-import { DataType, MMELNode, MMELObject } from '@/interface/baseinterface';
-import {
+import type { MMELNode, MMELObject } from '@/interface/baseinterface';
+import { DataType } from '@/interface/baseinterface';
+import type {
   MMELDataAttribute,
   MMELDataClass,
   MMELRegistry,
 } from '@/interface/datainterface';
-import {
+import type {
   MMELEndEvent,
   MMELSignalCatchEvent,
   MMELStartEvent,
   MMELTimerEvent,
 } from '@/interface/eventinterface';
-import {
+import type {
   MMELEdge,
   MMELEGate,
   MMELSubprocess,
   MMELSubprocessComponent,
 } from '@/interface/flowcontrolinterface';
-import { MMELModel } from '@/interface/model';
-import { MMELApproval, MMELProcess } from '@/interface/processinterface';
-import {
+import type { MMELModel } from '@/interface/model';
+import type { MMELApproval, MMELProcess } from '@/interface/processinterface';
+import type {
   MMELProvision,
   MMELReference,
   MMELRole,

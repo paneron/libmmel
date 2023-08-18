@@ -1,6 +1,6 @@
 import { DataType } from '@/interface/baseinterface';
 import { MMELremovePackage, MMELtokenizePackage } from '@/util/tokenizer';
-import {
+import type {
   MMELEndEvent,
   MMELSignalCatchEvent,
   MMELStartEvent,

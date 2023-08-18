@@ -13,7 +13,7 @@ import {
   parseVariable,
   parseView,
 } from '@/handler/supporthandler';
-import { MMELModel } from '@/interface/model';
+import type { MMELModel } from '@/interface/model';
 import { MMELremovePackage, MMELtokenize } from '@/util/tokenizer';
 import { parseApproval, parseProcess } from '@/handler/processhandler';
 import {

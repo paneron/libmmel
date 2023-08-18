@@ -1,4 +1,4 @@
-import { DataType, MMELNode, MMELObject } from '@/interface/baseinterface';
+import type { DataType, MMELNode, MMELObject } from '@/interface/baseinterface';
 
 export interface MMELSubprocessComponent extends MMELObject {
   element: string;
