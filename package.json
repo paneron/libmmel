@@ -11,7 +11,6 @@
   "dist_dir": "dist",
   "scripts": {
     "prepare": "ts-patch install -s",
-    "preinstall": "npx only-allow pnpm",
     "diagnose": "tsc --diagnostics",
     "typecheck": "tsc -p tsconfig.build.json --noEmit --pretty",
     "build:decl": "tsc -p tsconfig.types.json",
