@@ -49,7 +49,10 @@ import {
 import { validateModel } from '@/util/validation';
 
 /**
- * the function to convert text to MMEL
+ * Converts a string to MMEL model
+ * @param {string} x The string to convert to MMEL model
+ * @returns {MMELModel} The converted MMEL model, provided the model validates (by validateModel())
+ * @throws {Error} if the model is invalid
  */
 export function textToMMEL(x: string): MMELModel {
   const pm = parseModel(x);
@@ -58,7 +61,10 @@ export function textToMMEL(x: string): MMELModel {
 }
 
 /**
- * the function to convert MMEL to text
+ * Convert MMEL model to string
+ * @param {MMELModel} model The MMEL model to convert to string
+ * @param {string} modelVersion The model version (default = "undefined", a string)
+ * @returns {string} The string representation of the MMEL model
  */
 export function MMELToText(model: MMELModel, modelVersion: string = 'undefined'): string {
   let out = '';
@@ -115,6 +121,11 @@ export function MMELToText(model: MMELModel, modelVersion: string = 'undefined')
   return out;
 }
 
+/**
+ * Converts a string to MMEL model
+ * @param {string} x The string to convert to MMEL model
+ * @returns {MMELModel} The converted MMEL model
+ */
 function parseModel(input: string): MMELModel {
   const model: MMELModel = {
     meta       : parseMetaData(''),

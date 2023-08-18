@@ -21,17 +21,40 @@ endif::[]
 
 == Introduction
 
-This folder contains the data model for MMEL model. Note that this model does not contain runtime information. So, there is another model 'EditorModel' which is like an upgraded version of the model for the runtime.
+This folder contains the data model for MMEL model.
+Note that this model does not contain runtime information.
+So, there is another model 'EditorModel' which is like an upgraded version of the model for the runtime.
 
-== Folders
+== Installation
 
-- The interface folder
+Run:
+
+```console
+npm install @paneron/libmmel
+```
+
+== Usage Examples
+
+```typescript
+import { textToMMEL, MMELToText } from '@paneron/libmmel';
+import type { MMELModel } from '@paneron/libmmel/interface/model';
+
+
+const text = '... insert MMEL text here ...';
+const mmel: MMELModel = textToMMEL(text);
+console.log(MMELToText(mmel));
+
+```
+
+== Folder Structure
+
+- `interface/`
   * Contains the data structures of different elements in the model
-- The handler folder
+- `handler/`
   * Contains the codes for parsing MMEL structure to MMEL model
-- The util folder
+- `util/`
   * Provides other utility functions (Check the comments inside)
 
-== MMEL.ts
+== Roadmap
 
-It is the main model definition and API.
+- link:https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c?permalink_comment_id=3850849#gistcomment-3850849[Use pure ESM^].
