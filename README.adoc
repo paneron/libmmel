@@ -21,9 +21,11 @@ endif::[]
 
 == Introduction
 
-This folder contains the data model for MMEL model.
-Note that this model does not contain runtime information.
-So, there is another model 'EditorModel' which is like an upgraded version of the model for the runtime.
+This library implements serialization and deserialization of MMEL models,
+and provides exported interfaces for relevant data types.
+
+NOTE:  This model does not contain runtime information.
+Any such runtime information should be implemented in a separate model.
 
 == Installation
 
