@@ -45,7 +45,7 @@ import {
   toTermsModel,
   toVariableModel,
   toViewProfile as toViewProfileModel,
-} from '@/util/serailizeformater';
+} from '@/util/serializeformatter';
 import { validateModel } from '@/util/validation';
 
 /**
