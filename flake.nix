@@ -34,6 +34,7 @@
         env = [
         ];
         packages = with pkgs; [
+          commitizen
           node2nix
         ];
       };
