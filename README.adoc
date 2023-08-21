@@ -37,7 +37,7 @@ npm install @paneron/libmmel
 
 ```typescript
 import { textToMMEL, MMELToText } from '@paneron/libmmel';
-import type { MMELModel } from '@paneron/libmmel/interface/model';
+import type { MMELModel } from '@paneron/libmmel';
 
 
 const text = '... insert MMEL text here ...';
