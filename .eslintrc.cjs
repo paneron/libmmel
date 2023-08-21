@@ -181,7 +181,7 @@ module.exports = {
     {
       files : ["src/**/*.test.ts"],
       "parserOptions" : {
-        project : path.join(__dirname, "tsconfig.test.json"),
+        project : path.join(__dirname, "tsconfig.json"),
       },
       rules : rules,
     },
