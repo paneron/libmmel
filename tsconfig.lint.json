@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+  },
+  "include": [
+    "commitlint.config.ts"
+  ],
+  "exclude": [
+    "paneron-for-tests/",
+    "src/**/*.ts",
+    "spec/**/*.ts",
+    "test/**/*.ts"
+  ]
+}
