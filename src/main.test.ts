@@ -1,4 +1,66 @@
-import { textToMMEL, MMELToText } from '@'
+import { textToMMEL, MMELToText } from '@';
+
+import type {
+  MMELNode,
+  DataType,
+  MMELObject,
+} from '@';
+
+import type {
+  MMELDataAttribute,
+  MMELDataClass,
+  MMELEnumValue,
+  MMELEnum,
+  MMELRegistry,
+} from '@';
+
+import type {
+  MMELEventNode,
+  MMELEndEvent,
+  MMELSignalCatchEvent,
+  MMELStartEvent,
+  MMELTimerEvent,
+} from '@';
+
+import type {
+  VarType,
+  NOTE_TYPES,
+  BINARY_TYPES,
+  LINK_TYPES,
+} from '@';
+
+import type {
+  MMELMetadata,
+  MMELReference,
+  MMELProvision,
+  MMELRole,
+  MMELVariable,
+  MMELVarSetting,
+  MMELView,
+  MMELNote,
+  MMELTerm,
+  MMELTable,
+  MMELFigure,
+  MMELTextSection,
+  MMELLink,
+  MMELComment,
+} from '@';
+
+import type {
+  MMELApproval,
+  MMELProcess,
+} from '@';
+
+import type {
+  MMELSubprocessComponent,
+  MMELEdge,
+  MMELSubprocess,
+  MMELEGate,
+} from '@';
+
+import type {
+  MMELModel,
+} from '@';
 
 const sampleText = `root Root
 
@@ -58,3 +120,48 @@ test('textToMMEL converts schema version correctly', () => {
   expect(textToMMEL(sampleText).meta.schema).toBe(sampleMMEL.meta.schema);
 });
 
+type TestType = 'test' |
+  MMELNode |
+  DataType |
+  MMELObject |
+  MMELDataAttribute |
+  MMELDataClass |
+  MMELEnumValue |
+  MMELEnum |
+  MMELRegistry |
+  MMELEventNode |
+  MMELEndEvent |
+  MMELSignalCatchEvent |
+  MMELStartEvent |
+  MMELTimerEvent |
+  VarType |
+  typeof NOTE_TYPES |
+  typeof BINARY_TYPES |
+  typeof LINK_TYPES |
+  MMELMetadata |
+  MMELReference |
+  MMELProvision |
+  MMELRole |
+  MMELVariable |
+  MMELVarSetting |
+  MMELView |
+  MMELNote |
+  MMELTerm |
+  MMELTable |
+  MMELFigure |
+  MMELTextSection |
+  MMELLink |
+  MMELComment |
+  MMELApproval |
+  MMELProcess |
+  MMELSubprocessComponent |
+  MMELEdge |
+  MMELSubprocess |
+  MMELEGate |
+  MMELModel;
+
+
+test('"@" exports all interfaces', () => {
+  const testType: TestType = 'test';
+  expect(testType).toBe('test');
+})
