@@ -53,11 +53,16 @@ main() {
     fi
   fi
 
-  if [[ "$2" == "message" ]]
-  then
-    log "Git message given.  Skipping prepare-commit-msg."
-    exit
-  fi
+  case "$2" in
+    message)
+      log "Git message given.  Skipping prepare-commit-msg."
+      exit
+      ;;
+    commit)
+      log "Probably amending commit.  Skipping prepare-commit-msg."
+      exit
+      ;;
+  esac
 
   if exec < /dev/tty
   then
