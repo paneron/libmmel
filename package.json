@@ -107,7 +107,9 @@
     "typescript-transform-paths": "^3.4.6"
   },
   "config": {
-    "commitizen": {}
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
   },
   "license": "MIT"
 }
