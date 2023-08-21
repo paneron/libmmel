@@ -233,3 +233,63 @@ function parseModel(input: string): MMELModel {
   }
   return model;
 }
+
+export type {
+  MMELNode,
+  DataType,
+  MMELObject,
+} from '@/interface/baseinterface';
+
+export type {
+  MMELDataAttribute,
+  MMELDataClass,
+  MMELEnumValue,
+  MMELEnum,
+  MMELRegistry,
+} from '@/interface/datainterface';
+
+export type {
+  MMELEventNode,
+  MMELEndEvent,
+  MMELSignalCatchEvent,
+  MMELStartEvent,
+  MMELTimerEvent,
+} from '@/interface/eventinterface';
+
+export {
+  VarType,
+  NOTE_TYPES,
+  BINARY_TYPES,
+  LINK_TYPES,
+} from '@/interface/supportinterface';
+
+export type {
+  MMELMetadata,
+  MMELReference,
+  MMELProvision,
+  MMELRole,
+  MMELVariable,
+  MMELVarSetting,
+  MMELView,
+  MMELNote,
+  MMELTerm,
+  MMELTable,
+  MMELFigure,
+  MMELTextSection,
+  MMELLink,
+  MMELComment,
+} from '@/interface/supportinterface';
+
+export type {
+  MMELApproval,
+  MMELProcess,
+} from '@/interface/processinterface';
+
+export type {
+  MMELSubprocessComponent,
+  MMELEdge,
+  MMELSubprocess,
+  MMELEGate,
+} from '@/interface/flowcontrolinterface';
+
+export type { MMELModel } from '@/interface/model';
