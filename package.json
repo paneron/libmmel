@@ -111,5 +111,10 @@
       "path": "@commitlint/cz-commitlint"
     }
   },
-  "license": "MIT"
+  "license": "MIT",
+  "pnpm": {
+    "overrides": {
+      "@babel/traverse@<7.23.2": ">=7.23.2"
+    }
+  }
 }
