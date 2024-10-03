@@ -6,6 +6,9 @@ test_outputs/
 
 .pnpm-store/
 
+# Direnv
+.direnv
+
 # Created by https://www.toptal.com/developers/gitignore/api/osx,vim,linux,emacs,eclipse,windows,textmate,webstorm,sublimetext,intellij+all,visualstudiocode,node,yarn
 # Edit at https://www.toptal.com/developers/gitignore?templates=osx,vim,linux,emacs,eclipse,windows,textmate,webstorm,sublimetext,intellij+all,visualstudiocode,node,yarn
 
